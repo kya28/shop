@@ -1,0 +1,9 @@
+{% extends 'amado/layout.html' %}
+{% load static %}
+{% block content %}
+<main>
+<p>Logged out!</p>
+
+<a href="{% url 'login'%}">Click here to login again.</a>
+    </main>
+{% endblock %}

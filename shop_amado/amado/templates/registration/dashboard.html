@@ -1,0 +1,14 @@
+{% extends 'amado/layout.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <h1>Dashboard</h1>
+    <p>Welcome to your dashboard.</p>
+     <p>First name: {{ request.user.first_name}}</p>
+     <p>Last name: {{ request.user.last_name }}</p>
+     <p>You email: {{ request.user.email }}</p>
+     <p>Data of birth: {{ profile_user.date_of_birth}}</p>
+    <a href="{% url 'edit' %}">Edit profile</a><br>
+    <a href="{% url 'password_change' %}">Change password</a>
+</main>
+{% endblock %}

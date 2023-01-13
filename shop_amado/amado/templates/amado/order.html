@@ -1,0 +1,39 @@
+{% extends 'amado/layout.html' %}
+{% load static %}
+{% block content %}
+<div class="cart-table clearfix">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Products</th>
+                                        <th>Total Price</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for order in orders %}
+                                    <tr>
+                                        <td class="cart_product_desc">
+                                            {% for product in order.products.all %}
+                                            <span>{{product.item}}: ${{product.price}}</span><br>
+                                            {% endfor %}
+                                        </td>
+                                        <td class="price">
+                                            <span>${{order.price}}</span>
+                                        </td>
+                                        <td class="qty">
+                                            <div class="qty-btn d-flex">
+                                                <span>{{order.date}}</span>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+</div>
+
+
+
+
+{% endblock %}
