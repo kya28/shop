@@ -1,6 +1,9 @@
+from django.conf.urls.static import static
 from django.urls import path, include
 from amado.views import index, shop, product_detail, cart, cart_add, cart_delete_product, cart_all_delete, \
-    order, user_order, popular_products
+    order, user_order, popular_products, product_all
+
+from shop_amado import settings
 
 urlpatterns = [
     path('', index, name='index'),
@@ -13,6 +16,11 @@ urlpatterns = [
     path('orders', order, name='order'),
     path('user_orders', user_order, name='user_order'),
     path('shop/popular_products', popular_products, name='popular_products'),
+    path('shop/product_all', product_all, name='product_all')
 
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

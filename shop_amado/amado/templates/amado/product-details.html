@@ -33,26 +33,25 @@
                                     </li>
                                 </ol>
                                 <div class="carousel-inner">
+                                    {% for image in product_image %}
+                                        {% if image.product_pk.pk == product.pk %}
                                     <div class="carousel-item active">
-                                        <a class="gallery_img" href="../static/{{ product.image }}">
-                                            <img class="d-block w-100" src="../static/{{ product.image }}" alt="First slide">
+                                        <a class="gallery_img" href="{{ MEDIA_URL }}{{ image.images }}">
+                                            <img class="d-block w-100" src="{{ MEDIA_URL }}{{ image.images }}" alt="{{product.pk}} slide">
                                         </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="gallery_img" href="../static/{{ product.image }}">
-                                            <img class="d-block w-100" src="../static/{{product.image}}" alt="Second slide">
+                                        <a class="gallery_img" href="{{ image.images }}">
+                                            <img class="d-block w-100" src="/{{ image.images }}" alt="{{product.pk}} slide">
                                         </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="gallery_img" href="../static/{{product.image}}">
-                                            <img class="d-block w-100" src="../static/{{product.image}}" alt="Third slide">
+                                        <a class="gallery_img" href="{{ image.images }}">
+                                            <img class="d-block w-100" src="/{{ image.images }}" alt="{{product.pk}} slide">
                                         </a>
                                     </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="../static/{{product.image}}">
-                                            <img class="d-block w-100" src="../static/{{product.image}}" alt="Fourth slide">
-                                        </a>
-                                    </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -102,11 +101,32 @@
                             </form>
 
                         </div>
+
                     </div>
+                        <div class="container list-group">
+        <h3>Comments</h3>
+
+        {% for comment in comments %}
+        <div class="list-group-item">
+            <h4>User: {{ comment.user }}</h4>
+            <h5>Intro: {{ comment.title }}</h5>
+            <p>Feedback: {{ comment.text }}</p>
+            <i>Date: {{ comment.date }}</i>
+            <p>Rating: {{ comment.rating }}</p>
+        </div>
+        {% endfor %} {% include "amado/pagination.html" with page=comments %}
+    </div>
+    <div class="container list-group-item">
+        <h5>write your comment...</h5>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ comments_form.as_p }}
+            <input type="submit" value="submit" class="btn btn-success">
+        </form>
+    </div>
                 </div>
             </div>
         </div>
         <!-- Product Details Area End -->
-    </div>
-    <!-- ##### Main Content Wrapper End ##### -->
+
 {% endblock %}

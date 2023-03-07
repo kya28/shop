@@ -1,0 +1,19 @@
+{% extends 'amado/layout.html' %}
+
+{% block content %}
+          <div class="list">
+              <form action="" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ product_form.as_p }}
+                  {{ product_image_form.as_p }}
+                  <input type="submit" value="submit" class="btn btn-success">
+              </form>
+          </div>
+
+        </div>
+        <!-- Product Catagories Area End -->
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+
+{% endblock %}

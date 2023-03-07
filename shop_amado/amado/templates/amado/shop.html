@@ -143,9 +143,13 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="../static/{{product.image}}" alt="">
-                                <!-- Hover Thumb -->
-                                <img class="hover-img" src="../static/{{product.image}}" alt="">
+
+                                {% for image in product_image %}
+                                    {% if image.product_pk.pk == product.pk %}
+                                        <img src="{{ MEDIA_URL }}{{ image.images }}" alt="{{product.item}}">
+                                        <img class="hover-img" src="{{ MEDIA_URL }}{{ image.images }}" alt="{{product.item}}">
+                                    {% endif %}
+                                {% endfor %}
                             </div>
 
                             <!-- Product Description -->
@@ -197,7 +201,5 @@
         </div>
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
-
-
 
 {% endblock %}

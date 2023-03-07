@@ -1,7 +1,6 @@
 {% extends 'amado/layout.html' %}
 
 {% block content %}
-
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix">
             <div class="amado-pro-catagory clearfix">
@@ -11,7 +10,12 @@
                 {% for product in products %}
                 <div class="single-products-catagory clearfix">
                     <a href="{% url 'product_detail' product_pk=product.pk %}">
-                        <img src="static/{{ product.image }}" alt="{{product.item}}">
+                    {% for image in product_image %}
+                        {% if image.product_pk.pk == product.pk %}
+                        <img src="{{ MEDIA_URL }}{{ image.images }}" alt="{{product.item}}">
+                        {% endif %}
+                    {% endfor %}
+
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <div class="line"></div>
@@ -28,4 +32,5 @@
     <!-- ##### Main Content Wrapper End ##### -->
 
 
+<a href="{% url 'product_all' %}">Add new product. ALSO FOR ADMIN</a>
 {% endblock %}
